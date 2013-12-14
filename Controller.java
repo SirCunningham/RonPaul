@@ -6,12 +6,12 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
 public class Controller extends JPanel implements ActionListener {
     
     private Timer timer;
     private Model model;
     private View view;
+    private JFrame frame;
     
     public static void main(String[] args) {
         Model model = new Model(10);
@@ -20,15 +20,18 @@ public class Controller extends JPanel implements ActionListener {
     }
     
     public Controller(Model model, View view) {
+        super(new BorderLayout());
         this.model = model;
         this.view = view;
-        
+
         JSlider changeL = new JSlider(JSlider.HORIZONTAL,0,10,5);
         changeL.addChangeListener(new LengthListener());
+        this.view.getFrame().add(BorderLayout.SOUTH, changeL);
+
         
-        JSlider changeD = new JSlider(JSlider.HORIZONTAL,0,10,1);
+        JSlider changeD = new JSlider(JSlider.VERTICAL,0,1000,100);
         changeD.addChangeListener(new TimeListener());
-        
+        this.view.getFrame().add(BorderLayout.WEST,changeD);
         timer = new Timer((int)(model.getdt()),this);
         timer.start();
     }
