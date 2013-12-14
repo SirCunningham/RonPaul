@@ -1,4 +1,3 @@
-
 package labb4;
 
 import javax.swing.*;
@@ -23,9 +22,7 @@ public class View extends JPanel {
         frame.setVisible(true);
 
     }
-    public void add2(JSlider slider) {
-        this.add(slider);
-    }
+
     public JFrame getFrame() {
         return frame;
     }
@@ -37,9 +34,10 @@ public class View extends JPanel {
         int i = 0;
         while (i < model.getPos().length) {
             g2d.fill(new Ellipse2D.Double(model.getPos()[i],model.getPos()[i+1],
-                    10,10));
+                    2,2));
             i+=2;
         }
 
     }
 }
+
