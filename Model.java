@@ -1,10 +1,15 @@
 package labb4;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 
 public class Model {
 
     private Particle particles[];
-    private double L;
+    private double L=1;
+    private double dt=100;
 
     public Model(int n) {
         particles = new Particle[n];
@@ -35,6 +40,12 @@ public class Model {
 
     public double getL() {
         return L;
+    }
+    public void setdt(double dt) {
+        this.dt = dt;
+    }
+    public double getdt() {
+        return dt;
     }
 
     public class Particle {
