@@ -1,16 +1,20 @@
+
 package labb4;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
+import java.awt.event.*;
+import java.util.*;
 
 public class View extends JPanel {
 
     private Model model;
+    private JFrame frame;
 
     public View(Model model) {
         this.model = model;
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         frame.add(this);
@@ -18,6 +22,12 @@ public class View extends JPanel {
         frame.pack();
         frame.setVisible(true);
 
+    }
+    public void add2(JSlider slider) {
+        this.add(slider);
+    }
+    public JFrame getFrame() {
+        return frame;
     }
 
     public void paint(Graphics g) {
