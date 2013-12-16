@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+
 
 public class Controller extends JPanel implements ActionListener {
 
@@ -11,9 +13,8 @@ public class Controller extends JPanel implements ActionListener {
     private Model model;
     private View view;
     private JFrame frame;
-    private StringBuilder positions;
     private int time = 0;
-    private static int numOfTimeSteps = 1000;  //Convention?
+    private static int numOfTimeSteps = 10000;  //Convention?
     private int i = 0;
     private BufferedWriter writer;
 
@@ -24,7 +25,7 @@ public class Controller extends JPanel implements ActionListener {
     }
 
     public Controller(Model model, View view) {
-        super(new BorderLayout());
+
         this.model = model;
         this.view = view;
         try {
@@ -33,12 +34,11 @@ public class Controller extends JPanel implements ActionListener {
             ex.printStackTrace();
         }
 
-        JSlider changeL = new JSlider(JSlider.HORIZONTAL, 0, 10, 5);
+        JSlider changeL = new JSlider(JSlider.HORIZONTAL, 0, 10, 1);
         changeL.addChangeListener(new LengthListener());
         this.view.getFrame().add(BorderLayout.SOUTH, changeL);
 
-
-        JSlider changeD = new JSlider(JSlider.VERTICAL, 1, 1000, 100);
+        JSlider changeD = new JSlider(JSlider.VERTICAL, 0, 200, 20);
         changeD.addChangeListener(new TimeListener());
         this.view.getFrame().add(BorderLayout.WEST, changeD);
         timer = new Timer((int) (model.getdt()), this);
@@ -65,29 +65,30 @@ public class Controller extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         model.updateAll();
         view.repaint();
-        if (i < numOfTimeSteps) {
+        if (view.getButton().getState()) {
             StringBuilder str = new StringBuilder();
             time += model.getdt();
             str.append(time);
             double[] modelPos = model.getPos();
-            for (double pos : model.getPos()) {
+            for (int j = 0; j < modelPos.length / 2; j++) {
                 str.append(",");
-                str.append(pos);
+                str.append(modelPos[2 * j]);
+                str.append(",");
+                str.append(modelPos[2 * j + 1]);
             }
             str.append("\n");
             try {
-                //Effektivare med BufferedWriter
                 writer.write(str.toString());
 
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            i+=1;
+            i += 1;
         }
         if (i == numOfTimeSteps) {
             try {
                 writer.close();
-                System.exit(0);              
+                System.exit(0);
             } catch (IOException ex) {
                 System.out.println("Filen kunde inte stängas");
                 ex.printStackTrace();
