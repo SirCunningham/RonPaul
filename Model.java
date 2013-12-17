@@ -112,7 +112,7 @@ public class Model {
         }
 
         public Particle() {
-            this((int) (Math.random() * xmax),
+            this((int) (Math.random() * xmax),          //int??
                     (int) (Math.random() * ymax));    //x=?,y=?
         }
 
