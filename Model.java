@@ -141,9 +141,9 @@ public class Model {
                     yPos += L * Math.sin(2 * Math.random() * Math.PI);
                 }
                 //Fastnar om den träffar cirkel i mitten
-                if ((int)((xPos - xmax / 2) * (xPos - xmax / 2) 
+                if ((int) ((xPos - xmax / 2) * (xPos - xmax / 2) 
                         + (yPos - ymax / 2) * (yPos - ymax / 2)) == 50*50) {
-                    isStuck=true;
+                    isStuck = true;
                 }
             }
         }
