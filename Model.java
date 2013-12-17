@@ -32,8 +32,7 @@ public class Model {
             if (!part.isStuck()) {
                 part.update();
                 collide(part, stuckParticles.get(getRegion(part)));
-            }
-            if (part.isStuck()) {
+            } else {
                 stuckParticles.get(getRegion(part)).add(part);
             }
         }
