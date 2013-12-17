@@ -26,6 +26,7 @@ public class Model {
         }
     }
 
+    //updatePos mer naturligt tycker jag, jfr getPos/getAll
     public void updateAll() {
         for (Particle part : particles) {
             if (!part.isStuck()) {
