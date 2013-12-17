@@ -101,7 +101,7 @@ public class Model {
         return dt;
     }
 
-    public class Particle {
+    private class Particle {
 
         private double xPos;
         private double yPos;
