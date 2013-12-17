@@ -147,8 +147,6 @@ public class Model {
                     isStuck=true;
                 }
             }
-
-
         }
 
         public double getX() {
@@ -166,6 +164,8 @@ public class Model {
         public void setStuck(boolean b) {
             isStuck = b;
         }
+    
     }
+
 }
 
