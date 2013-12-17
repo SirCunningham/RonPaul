@@ -77,7 +77,7 @@ public class Model {
 
     public double[] getPos() {
         double[] positions = new double[2 * particles.length];
-        for (int i = 0; i < particles.length; i += 1) {
+        for (int i = 0; i < particles.length; i++) {
             positions[2 * i] = particles[i].getX();
             positions[2 * i + 1] = particles[i].getY();
         }
