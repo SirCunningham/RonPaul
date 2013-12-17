@@ -157,7 +157,7 @@ public class Model {
         }
 
         public boolean isStuck() {
-            return this.isStuck;
+            return isStuck;
         }
 
         public void setStuck(boolean b) {
