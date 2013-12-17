@@ -24,7 +24,7 @@ public class Model {
         for (int i = 0; i < numOfRegions * numOfRegions; i++) {
             stuckParticles.add(new ArrayList<Particle>());
         }
-    }
+    
 
     //updatePos mer naturligt tycker jag, jfr getPos/getAll
     public void updateAll() {
@@ -38,8 +38,7 @@ public class Model {
         }
     }
 
-    public Particle[] getParticles() {
-        return particles;
+
     }
     //Vi räknar regionerna från vänster-höger och uppåt-nedåt
 
