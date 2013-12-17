@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-
 public class Model {
 
     private Particle particles[];
