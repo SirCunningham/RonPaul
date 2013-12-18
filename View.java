@@ -20,7 +20,6 @@ public class View extends JPanel {
         button.addActionListener(button);
 
         frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension((int) width, (int) height));
         frame.add(this);
         frame.add(BorderLayout.SOUTH, button);
