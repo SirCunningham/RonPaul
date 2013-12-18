@@ -1,4 +1,4 @@
-package java4;
+package labb4;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -90,8 +90,7 @@ public class Controller extends JPanel implements ActionListener,
     }
 
     public static void main(String[] args) {
-        Model model = new Model(8);
+        Model model = new Model(10000);
         new Controller(model, new View(model));
     }
-
 }
