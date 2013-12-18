@@ -41,9 +41,9 @@ public class View extends JPanel {
             } else {
                 g2d.setColor(Color.YELLOW);
             }
-            g2d.fill(new Ellipse2D.Double(model.getPos()[2*i],
+            g2d.fill(new Ellipse2D.Double(model.getPos()[2 * i],
                     model.getPos()[2 * i + 1], 2, 2));
-            i += 2;
+            i += 1;
         }
     }
 
