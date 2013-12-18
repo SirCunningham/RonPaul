@@ -5,7 +5,7 @@ dt = filter([1 -1], 1, t);
 T = length(t);
 null = zeros(1, T);
 xmin = null; xmax = null; ymin = null; ymax = null;
-xmean = null; ymean = null; xstd = null; ystd = null;
+xmean = null; ymean = null; xstd = null; ystd = null; dist = null;
 figure(1)
 for(k=1:T)
     x = pos(k, 2:2:end);
@@ -18,6 +18,9 @@ for(k=1:T)
     ymax(k) = max(y);
     ymean(k) = mean(y);
     ystd(k) = std(y);
+    X = [x' y'];
+    D = pdist2(X, X, 'euclidean', 'Smallest', 2);
+    dist(k) = mean(D(2, :));
 
     set(gcf, 'DoubleBuffer', 'On')
     plot(x, y, '*')
@@ -48,3 +51,8 @@ plot(t, xstd, 'r')
 plot(t, ystd, 'b')
 title('Standardavvikelse för x resp. y som funktion av t')
 legend('x', 'y')
+
+figure(5)
+hold on
+plot(t, dist, 'g')
+title('Medelavstånd till närmaste partikel som funktion av t')
