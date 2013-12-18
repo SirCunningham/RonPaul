@@ -22,7 +22,7 @@ public class MyButton extends JButton implements ActionListener {
     }
 
     public MyButton() {
-        this(Color.RED, Color.GREEN, "Stopp", "Start");
+        this(Color.GREEN, Color.RED, "Start", "Stopp");
     }
 
     public void toggleState() {
