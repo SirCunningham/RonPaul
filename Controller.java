@@ -1,4 +1,4 @@
-package java4;
+package labb4;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -14,7 +14,7 @@ public class Controller extends JPanel implements ActionListener,
     private final View view;
     private final JSlider LSlider;
     private final JSlider deltaSlider;
-    private static final int maxSteps = 10000;  //Convention?
+    private static final int maxSteps = 100; //Convention?
     private int time = 0;
     private int i = 0;
     private BufferedWriter writer;
@@ -58,7 +58,7 @@ public class Controller extends JPanel implements ActionListener,
     public void actionPerformed(ActionEvent e) {
         model.updatePos();
         view.repaint();
-        if (view.getButton().getState() == 1 && log) {
+        if (i<maxSteps && log) {
             StringBuilder str = new StringBuilder();
             time += model.getdt();
             str.append(time);
@@ -90,8 +90,7 @@ public class Controller extends JPanel implements ActionListener,
     }
 
     public static void main(String[] args) {
-        Model model = new Model(800);
+        Model model = new Model(8);
         new Controller(model, new View(model));
     }
-
 }
