@@ -1,7 +1,7 @@
 clear all
 pos = load('Positions.txt');
-t = pos(:, 1);
-dt = filter([1 -1], 1, t); %dt=max(0,dt) eventuellt, har inte tankat ännu
+t = pos(:, 1) * 0.001;
+dt = filter([1 -1], 1, t);
 T = length(t);
 null = zeros(1, T);
 xmin = null; xmax = null; ymin = null; ymax = null;
