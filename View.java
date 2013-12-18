@@ -1,4 +1,5 @@
-package java4;
+package labb4;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
@@ -31,7 +32,6 @@ public class View extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.BLUE);
         g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
-        g2d.setColor(Color.WHITE);
         Model.Particle[] particles = model.getParticles();
         double[] positions = model.getPos();
         for (int i=0;i < particles.length;i++) {
