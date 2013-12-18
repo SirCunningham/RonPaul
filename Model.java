@@ -7,7 +7,7 @@ public class Model {
     private Particle particles[];
     private double L = 1;
     private int dt = 100;
-    private int regions = 500; //Dela rutan i ett 10x10-rutnät
+    private int regions = 80; //Dela rutan i ett 10x10-rutnät
     private int xmax = ((int) View.width) - 100;
     private int ymax = ((int) View.height) - 100;
     private ArrayList<ArrayList<Particle>> stuckParticles =
