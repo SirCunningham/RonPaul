@@ -37,6 +37,17 @@ public class Controller extends JPanel implements ActionListener,
         deltaSlider.addChangeListener(this);
         this.view.getFrame().add(BorderLayout.NORTH, LSlider);
         this.view.getFrame().add(BorderLayout.WEST, deltaSlider);
+        this.view.getFrame().addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
+                try {
+                    writer.close();
+                    System.exit(0);
+                } catch (IOException ex) {
+                    System.out.println("Filen kunde stängas");
+                    ex.printStackTrace();
+                }
+            }
+        });
         this.view.getFrame().pack();
         this.view.getFrame().setVisible(true);
 
@@ -76,7 +87,7 @@ public class Controller extends JPanel implements ActionListener,
                 System.err.println("Kunde inte redigera filen.");
                 ex.printStackTrace();
             }
-            i++;
+            //i++;
             if (i == maxSteps) {
                 try {
                     writer.close();
