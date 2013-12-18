@@ -1,8 +1,5 @@
-package labb4;
+package java4;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 
 public class Model {
@@ -10,106 +7,62 @@ public class Model {
     private Particle particles[];
     private double L = 1;
     private int dt = 100;
-    private int numOfRegions = 100;  //Dela rutan i ett 10x10 rutnät
-    private int xmax = View.XMAX - 150;
-    private int ymax = View.YMAX - 50;
+    private int regions = 100;  //Dela rutan i ett 10x10-rutnät
+    private int xmax = ((int) View.width) - 100;
+    private int ymax = ((int) View.height) - 100;
     private ArrayList<ArrayList<Particle>> stuckParticles =
             new ArrayList<ArrayList<Particle>>();
 
     public Model(int n) {
-        particles = new Particle[n];
+        particles = new Particle[n];        //Skapar bara hälften så många!!
         for (int i = 0; i < n; i++) {
             particles[i] = new Particle();
         }
-        for (int i = 0; i < numOfRegions * numOfRegions; i++) {
+        for (int i = 0; i < regions * regions; i++) {
             stuckParticles.add(new ArrayList<Particle>());
         }
     }
 
-    public void updateAll() {
+    public void updatePos() {
         for (Particle part : particles) {
             if (!part.isStuck()) {
                 part.update();
-                int region = getRegion(part);
-                collide(part, stuckParticles.get(region));
-                if (region == 0) {
-                    collide(part, stuckParticles.get(1));
-                    collide(part, stuckParticles.get(numOfRegions));
-                    collide(part, stuckParticles.get(numOfRegions + 1));
-                } else if (region == numOfRegions - 1) {
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region + numOfRegions));
-                    collide(part, stuckParticles.get(region + numOfRegions - 1));
-                } else if (region == numOfRegions * numOfRegions - numOfRegions) {
-                    collide(part, stuckParticles.get(region + 1));
-                    collide(part, stuckParticles.get(region - numOfRegions));
-                    collide(part, stuckParticles.get(region - numOfRegions + 1));
-                } else if (region == numOfRegions * numOfRegions - 1) {
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region - numOfRegions));
-                    collide(part, stuckParticles.get(region - numOfRegions - 1));
-                } else if (0 < region && region < numOfRegions) {
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region + 1));
-                    collide(part, stuckParticles.get(region+numOfRegions - 1));
-                    collide(part, stuckParticles.get(region+numOfRegions));
-                    collide(part, stuckParticles.get(region+numOfRegions+1));
-
-                } else if (region % numOfRegions == 0) {
-                    collide(part,stuckParticles.get(region-numOfRegions));
-                    collide(part,stuckParticles.get(region-numOfRegions+1));
-                    collide(part,stuckParticles.get(region+1));
-                    collide(part,stuckParticles.get(region+numOfRegions));
-                    collide(part,stuckParticles.get(region+numOfRegions+1));
-                } else if (region % numOfRegions == numOfRegions-1) {
-                    collide(part,stuckParticles.get(region-numOfRegions));
-                    collide(part,stuckParticles.get(region-numOfRegions-1));
-                    collide(part,stuckParticles.get(region-1));
-                    collide(part,stuckParticles.get(region+numOfRegions));
-                    collide(part,stuckParticles.get(region+numOfRegions-1));
-                } else if (numOfRegions*numOfRegions-numOfRegions < region 
-                        && region < numOfRegions*numOfRegions) {
-                    collide(part,stuckParticles.get(region-1));
-                    collide(part,stuckParticles.get(region+1));
-                    collide(part,stuckParticles.get(region-numOfRegions));
-                    collide(part,stuckParticles.get(region-numOfRegions-1));
-                    collide(part,stuckParticles.get(region-numOfRegions+1));
-                } else {
-                    collide(part,stuckParticles.get(region-numOfRegions-1));
-                    collide(part,stuckParticles.get(region-numOfRegions));
-                    collide(part,stuckParticles.get(region-numOfRegions+1));
-                    collide(part,stuckParticles.get(region-1));
-                    collide(part,stuckParticles.get(region+1));
-                    collide(part,stuckParticles.get(region+numOfRegions-1));
-                    collide(part,stuckParticles.get(region+numOfRegions));
-                    collide(part,stuckParticles.get(region+numOfRegions+1));
-                }
-
-            }
-            if (part.isStuck()) {
+                collide(part, stuckParticles.get(getRegion(part)));
+            } else {
                 stuckParticles.get(getRegion(part)).add(part);
             }
         }
     }
 
+    public double[] getPos() {
+        double[] positions = new double[2 * particles.length];
+        for (int i = 0; i < particles.length; i++) {
+            positions[2 * i] = particles[i].getX();
+            positions[2 * i + 1] = particles[i].getY();
+        }
+        return positions;
+
+    }
+
+    public Particle[] getParticles() {
+        return particles;
+    }
+
     //Vi räknar regionerna från vänster-höger och uppåt-nedåt
-    int getRegion(Particle p) {
+    public int getRegion(Particle p) {
         int x = 0;
         int y = 0;
-        for (int i = 0; i < numOfRegions; i++) {
-            if (i * xmax / numOfRegions <= p.getX()
-                    && p.getX() <= (i + 1) * xmax / numOfRegions) {
-                x = numOfRegions * i;
+        for (int i = 0; i < regions; i++) {
+            if (i * xmax / regions <= p.getX()
+                    && p.getX() <= (i + 1) * xmax / regions) {
+                x = regions * i;
             }
-            if (i * ymax / numOfRegions <= p.getY()
-                    && p.getY() <= (i + 1) * ymax / numOfRegions) {
+            if (i * ymax / regions <= p.getY()
+                    && p.getY() <= (i + 1) * ymax / regions) {
                 y = i;
             }
         }
         return x + y;
-    }
-    public Particle[] getParticles() {
-        return particles;
     }
 
     //Math.sqrt inte lika effektivt
@@ -125,16 +78,6 @@ public class Model {
                 break;
             }
         }
-    }
-
-    public double[] getPos() {
-        double[] positions = new double[2 * particles.length];
-        for (int i = 0; i < particles.length; i += 1) {
-            positions[2 * i] = particles[i].getX();
-            positions[2 * i + 1] = particles[i].getY();
-        }
-        return positions;
-
     }
 
     public void setL(double L) {
@@ -165,11 +108,11 @@ public class Model {
         }
 
         public Particle() {
-            this((Math.random() * xmax),
-                    (Math.random() * ymax));    //x=?,y=?
+            this((double) (Math.random() * xmax),
+                    (double) (Math.random() * ymax));    //x=?,y=?
         }
 
-        public void update() {
+        public void update() {      //Stil: Operatorer på rätt rad?
             if (!isStuck) {
                 if (xPos + L * Math.cos(2 * Math.random() * Math.PI) >= xmax
                         || xPos >= xmax) {
@@ -194,13 +137,11 @@ public class Model {
                     yPos += L * Math.sin(2 * Math.random() * Math.PI);
                 }
                 //Fastnar om den träffar cirkel i mitten
-                if ((int) ((xPos - xmax / 2) * (xPos - xmax / 2)
-                        + (yPos - ymax / 2) * (yPos - ymax / 2)) == 50 * 50) {
+                if ((int) ((xPos - xmax / 2) * (xPos - xmax / 2) +
+                        (yPos - ymax / 2) * (yPos - ymax / 2)) == 50*50) {
                     isStuck = true;
                 }
             }
-
-
         }
 
         public double getX() {
@@ -212,12 +153,13 @@ public class Model {
         }
 
         public boolean isStuck() {
-            return this.isStuck;
+            return isStuck;
         }
 
         public void setStuck(boolean b) {
             isStuck = b;
         }
+    
     }
-}
 
+}
