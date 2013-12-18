@@ -1,4 +1,4 @@
-package labb4;
+package java4;
 
 import java.util.*;
 
@@ -14,7 +14,7 @@ public class Model {
             new ArrayList<ArrayList<Particle>>();
 
     public Model(int n) {
-        particles = new Particle[n]; //Skapar bara hälften så många!!
+        particles = new Particle[n];
         for (int i = 0; i < n; i++) {
             particles[i] = new Particle();
         }
@@ -88,6 +88,7 @@ public class Model {
             }
         }
     }
+
     public double[] getPos() {
         double[] positions = new double[2 * particles.length];
         for (int i = 0; i < particles.length; i++) {
@@ -95,7 +96,6 @@ public class Model {
             positions[2 * i + 1] = particles[i].getY();
         }
         return positions;
-
     }
 
     public Particle[] getParticles() {
@@ -213,5 +213,7 @@ public class Model {
         public void setStuck(boolean b) {
             isStuck = b;
         }
+
     }
+
 }
