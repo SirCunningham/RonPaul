@@ -7,9 +7,11 @@ public class Model {
     private Particle particles[];
     private double L = 1;
     private int dt = 100;
-    private int regions = 80; //Dela rutan i ett 10x10-rutnät
-    private int xmax = ((int) View.width) - 30;   //30 på min dator och inte 21
-    private int ymax = ((int) View.height) - 73;
+    private static final int regions = 80; //Dela rutan i ett 80x80-rutnät
+    private static final int xmax = ((int) View.width) - 30; //21
+    private static final int ymax = ((int) View.height) - 73;
+    private static final int radiusSquared = (xmax > ymax ? ymax : xmax) * 0.2 *
+            (xmax > ymax ? ymax : xmax) * 0.2;
     private ArrayList<ArrayList<Particle>> stuckParticles =
             new ArrayList<ArrayList<Particle>>();
 
@@ -192,7 +194,7 @@ public class Model {
                 }
                 //Fastnar om den träffar cirkel i mitten
                 if ((int) ((xPos - xmax / 2) * (xPos - xmax / 2)
-                        + (yPos - ymax / 2) * (yPos - ymax / 2)) == 50 * 50) {
+                        + (yPos - ymax / 2) * (yPos - ymax / 2)) == radiusSquared) {
                     isStuck = true;
                 }
             }
