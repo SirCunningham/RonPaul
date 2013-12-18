@@ -1,6 +1,7 @@
 clear all
 pos = load('Positions.txt');
 t = pos(:, 1);
+dt = filter([1 -1], 1, t);
 T = length(t);
 null = zeros(1, T);
 xmin = null; xmax = null; ymin = null; ymax = null;
@@ -22,7 +23,7 @@ for(k=1:T)
     plot(x, y, '*')
     axis([min(xmin) max(xmax) min(ymin) max(ymax)])
     drawnow
-    pause([filter([1 -1], 1, pos(k, 1)) 0])
+    pause(dt(k))
 end
 
 figure(2)
