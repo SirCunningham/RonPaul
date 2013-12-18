@@ -32,10 +32,11 @@ public class MyButton extends JButton implements ActionListener {
     }
 
     public boolean getState() {
-        return state==1;
+        return state != 0;
     }
 
     public void actionPerformed(ActionEvent e) {
         toggleState();
     }
+
 }
