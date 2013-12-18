@@ -8,10 +8,10 @@ public class Model {
     private double L = 1;
     private int dt = 100;
     private static final int regions = 80; //Dela rutan i ett 80x80-rutnät
-    private static final int xmax = ((int) View.width) - 30; //21
+    private static final int xmax = ((int) View.width) - 31; //21
     private static final int ymax = ((int) View.height) - 73;
-    private static final int radiusSquared = (xmax > ymax ? ymax : xmax) * 0.2 *
-            (xmax > ymax ? ymax : xmax) * 0.2;
+    private static final int radiusSquared = (xmax > ymax ? ymax : xmax) *
+            (xmax > ymax ? ymax : xmax) / 25;
     private ArrayList<ArrayList<Particle>> stuckParticles =
             new ArrayList<ArrayList<Particle>>();
 
