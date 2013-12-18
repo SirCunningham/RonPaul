@@ -30,7 +30,7 @@ public class Model {
         ArrayList<Integer> limitRegions = new ArrayList<Integer>();
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                k = region + i + j * regions;
+                int k = region + i + j * regions;
                 if (k >= 0 && k < regions * regions) {
                     limitRegions.add(k);
                 }
