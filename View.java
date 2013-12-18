@@ -43,7 +43,7 @@ public class View extends JPanel {
             }
             g2d.fill(new Ellipse2D.Double(model.getPos()[2 * i],
                     model.getPos()[2 * i + 1], 2, 2));
-            i += 1;
+            i++;
         }
     }
 
@@ -54,4 +54,5 @@ public class View extends JPanel {
     public MyButton getButton() {
         return button;
     }
+
 }
