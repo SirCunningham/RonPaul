@@ -34,7 +34,7 @@ public class View extends JPanel {
         g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
         Model.Particle[] particles = model.getParticles();
         double[] positions = model.getPos();
-        for (int i=0;i < particles.length;i++) {
+        for (int i = 0; i < particles.length; i++) {
             if (particles[i].isStuck()) {
                 g2d.setColor(Color.RED);
             } else {
