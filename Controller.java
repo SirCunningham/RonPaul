@@ -1,4 +1,4 @@
-package labb4;
+package java4;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -58,7 +58,7 @@ public class Controller extends JPanel implements ActionListener,
     public void actionPerformed(ActionEvent e) {
         model.updatePos();
         view.repaint();
-        if (i<maxSteps && log) {
+        if (view.getButton().getState() && log) {
             StringBuilder str = new StringBuilder();
             time += model.getdt();
             str.append(time);
@@ -93,4 +93,5 @@ public class Controller extends JPanel implements ActionListener,
         Model model = new Model(8);
         new Controller(model, new View(model));
     }
+
 }
