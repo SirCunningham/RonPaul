@@ -28,12 +28,12 @@ public class Model {
 
     public ArrayList<Integer> limitRegions(int region) {
         ArrayList<Integer> limitRegions = new ArrayList<Integer>();
-        int[] testRegions = {region, region - 1, region + 1, region + regions,
-            region + regions + 1, region + regions - 1, region - regions, region - regions - 1,
-            region - regions + 1};
-        for (int reg : testRegions) {
-            if (reg >= 0 && reg < regions * regions) {
-                limitRegions.add(reg);
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                k = region + i + j * regions
+                if (k >= 0 && k < regions * regions) {
+                    limitRegions.add(k);
+                }
             }
         }
         return limitRegions;
