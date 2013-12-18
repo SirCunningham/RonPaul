@@ -10,8 +10,8 @@ public class Model {
     private static final int regions = 80; //Dela rutan i ett 80x80-rutnät
     private static final int xmax = ((int) View.width) - 31; //21
     private static final int ymax = ((int) View.height) - 73;
-    private static final int radiusSquared = (xmax > ymax ? ymax : xmax) *
-            (xmax > ymax ? ymax : xmax) / 25;
+    private static final int radiusSquared = (xmax > ymax ? ymax : xmax)
+            * (xmax > ymax ? ymax : xmax) / 25;
     private ArrayList<ArrayList<Particle>> stuckParticles =
             new ArrayList<ArrayList<Particle>>();
 
@@ -23,6 +23,20 @@ public class Model {
         for (int i = 0; i < regions * regions; i++) {
             stuckParticles.add(new ArrayList<Particle>());
         }
+
+    }
+
+    public ArrayList<Integer> limitRegions(int region) {
+        ArrayList<Integer> limitRegions = new ArrayList<Integer>();
+        int[] testRegions = {region, region - 1, region + 1, region + regions,
+            region + regions + 1, region + regions - 1, region - regions, region - regions - 1,
+            region - regions + 1};
+        for (int reg : testRegions) {
+            if (reg >= 0 && reg < regions * regions) {
+                limitRegions.add(reg);
+            }
+        }
+        return limitRegions;
     }
 
     public void updatePos() {
@@ -30,60 +44,10 @@ public class Model {
             if (!part.isStuck()) {
                 part.update();
                 int region = getRegion(part);
-                collide(part, stuckParticles.get(region));
-                if (region == 0) {
-                    collide(part, stuckParticles.get(1));
-                    collide(part, stuckParticles.get(regions));
-                    collide(part, stuckParticles.get(regions + 1));
-                } else if (region == regions - 1) {
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region + regions));
-                    collide(part, stuckParticles.get(region + regions - 1));
-                } else if (region == regions * regions - regions) {
-                    collide(part, stuckParticles.get(region + 1));
-                    collide(part, stuckParticles.get(region - regions));
-                    collide(part, stuckParticles.get(region - regions + 1));
-                } else if (region == regions * regions - 1) {
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region - regions));
-                    collide(part, stuckParticles.get(region - regions - 1));
-                } else if (0 < region && region < regions) {
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region + 1));
-                    collide(part, stuckParticles.get(region + regions - 1));
-                    collide(part, stuckParticles.get(region + regions));
-                    collide(part, stuckParticles.get(region + regions + 1));
-
-                } else if (region % regions == 0) {
-                    collide(part, stuckParticles.get(region - regions));
-                    collide(part, stuckParticles.get(region - regions + 1));
-                    collide(part, stuckParticles.get(region + 1));
-                    collide(part, stuckParticles.get(region + regions));
-                    collide(part, stuckParticles.get(region + regions + 1));
-                } else if (region % regions == regions - 1) {
-                    collide(part, stuckParticles.get(region - regions));
-                    collide(part, stuckParticles.get(region - regions - 1));
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region + regions));
-                    collide(part, stuckParticles.get(region + regions - 1));
-                } else if (regions * regions - regions < region
-                        && region < regions * regions) {
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region + 1));
-                    collide(part, stuckParticles.get(region - regions));
-                    collide(part, stuckParticles.get(region - regions - 1));
-                    collide(part, stuckParticles.get(region - regions + 1));
-                } else {
-                    collide(part, stuckParticles.get(region - regions - 1));
-                    collide(part, stuckParticles.get(region - regions));
-                    collide(part, stuckParticles.get(region - regions + 1));
-                    collide(part, stuckParticles.get(region - 1));
-                    collide(part, stuckParticles.get(region + 1));
-                    collide(part, stuckParticles.get(region + regions - 1));
-                    collide(part, stuckParticles.get(region + regions));
-                    collide(part, stuckParticles.get(region + regions + 1));
+                ArrayList<Integer> limitRegions = limitRegions(region);
+                for (int reg : limitRegions) {
+                    collide(part, stuckParticles.get(reg));
                 }
-
             }
             if (part.isStuck()) {
                 stuckParticles.get(getRegion(part)).add(part);
