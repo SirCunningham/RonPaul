@@ -1,5 +1,4 @@
 package java4;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
@@ -33,17 +32,16 @@ public class View extends JPanel {
         g2d.setColor(Color.BLUE);
         g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
         g2d.setColor(Color.WHITE);
-
-        int i = 0;
-        while (i < model.getParticles().length) {
-            if (model.getParticles()[i].isStuck()) {
+        Model.Particle[] particles = model.getParticles();
+        double[] positions = model.getPos();
+        for (int i=0;i < particles.length;i++) {
+            if (particles[i].isStuck()) {
                 g2d.setColor(Color.RED);
             } else {
                 g2d.setColor(Color.YELLOW);
             }
-            g2d.fill(new Ellipse2D.Double(model.getPos()[2 * i],
-                    model.getPos()[2 * i + 1], 2, 2));
-            i++;
+            g2d.fill(new Ellipse2D.Double(positions[2 * i],
+                    positions[2 * i + 1], 2, 2));
         }
     }
 
@@ -54,5 +52,4 @@ public class View extends JPanel {
     public MyButton getButton() {
         return button;
     }
-
 }
