@@ -14,7 +14,7 @@ public class Controller extends JPanel implements ActionListener,
     private final View view;
     private final JSlider LSlider;
     private final JSlider deltaSlider;
-    private static final int maxSteps = 100; //Convention?
+    private static final int maxSteps = 200; //Convention?
     private int time = 0;
     private int i = 0;
     private BufferedWriter writer;
@@ -58,7 +58,7 @@ public class Controller extends JPanel implements ActionListener,
     public void actionPerformed(ActionEvent e) {
         model.updatePos();
         view.repaint();
-        if (view.getButton().getState() && log) {
+        if (view.getButton().getState() && log) {      //view.getButton().getState() //under 1000 med string
             StringBuilder str = new StringBuilder();
             time += model.getdt();
             str.append(time);
