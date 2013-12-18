@@ -23,17 +23,17 @@ for(k=1:T)
     plot(x, y, '*')
     axis([min(xmin) max(xmax) min(ymin) max(ymax)])
     drawnow
-    pause(dt(k))
+    pause(dt(k) * 0.1)
 end
 
 figure(2)
 hold on
-plot(t, xmin, 'r')
-plot(t, ymin, 'b')
-plot(t, xmax, 'r')
-plot(t, ymax, 'b')
+plot(t, xmin, 'r:')
+plot(t, ymin, 'b:')
+plot(t, xmax, 'r--')
+plot(t, ymax, 'b--')
 title('Största resp. minsta x- och y-värde som funktion av t')
-legend('x', 'y')
+legend('x_{min}', 'y_{min}', 'x_{max}', 'y_{max}')
 
 figure(3)
 hold on
