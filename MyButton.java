@@ -5,11 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MyButton extends JButton implements ActionListener {
-    
+
     private int state;
     private Color[] colArray = new Color[2];
     private String[] textArray = new String[2];
-    
+
     public MyButton(Color col1, Color col2, String text1, String text2) {
         state = 0;
         colArray[0] = col1;
@@ -20,23 +20,22 @@ public class MyButton extends JButton implements ActionListener {
         setBackground(colArray[state]);
         setText(textArray[state]);
     }
-    
+
     public MyButton() {
-        this(Color.RED, Color.GREEN, "Loggar inte", "Loggar");
+        this(Color.RED, Color.GREEN, "Stopp", "Start");
     }
-    
+
     public void toggleState() {
         state = (state + 1) % 2;
         setBackground(colArray[state]);
         setText(textArray[state]);
     }
-    
-    public int getState() {
-        return state;
+
+    public boolean getState() {
+        return state==1;
     }
-    
+
     public void actionPerformed(ActionEvent e) {
         toggleState();
     }
-
 }
