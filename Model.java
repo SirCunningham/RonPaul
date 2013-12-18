@@ -8,7 +8,7 @@ public class Model {
     private double L = 1;
     private int dt = 100;
     private int regions = 80; //Dela rutan i ett 10x10-rutnät
-    private int xmax = ((int) View.width) - 21;
+    private int xmax = ((int) View.width) - 30;   //30 på min dator och inte 21
     private int ymax = ((int) View.height) - 73;
     private ArrayList<ArrayList<Particle>> stuckParticles =
             new ArrayList<ArrayList<Particle>>();
