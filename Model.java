@@ -1,4 +1,4 @@
-package java4;
+package labb4;
 
 import java.util.*;
 
@@ -7,7 +7,7 @@ public class Model {
     private Particle particles[];
     private double L = 1;
     private int dt = 100;
-    private int regions = 100; //Dela rutan i ett 10x10-rutnät
+    private int regions = 500; //Dela rutan i ett 10x10-rutnät
     private int xmax = ((int) View.width) - 100;
     private int ymax = ((int) View.height) - 100;
     private ArrayList<ArrayList<Particle>> stuckParticles =
@@ -127,7 +127,7 @@ public class Model {
 
     public void collide(Particle p, ArrayList<Particle> ps) {
         for (Particle part : ps) {
-            if (distanceSquared(p, part) < 2 * 2) {
+            if (distanceSquared(p, part) < 3 * 3) {
                 p.setStuck(true);
                 break;
             }
@@ -213,7 +213,5 @@ public class Model {
         public void setStuck(boolean b) {
             isStuck = b;
         }
-
     }
-
 }
