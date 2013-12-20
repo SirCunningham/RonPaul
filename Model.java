@@ -13,7 +13,7 @@ public class Model {
     private static final int radiusSquared = (xmax > ymax ? ymax : xmax)
             * (xmax > ymax ? ymax : xmax) / 25;
     private ArrayList<ArrayList<Particle>> stuckParticles =
-            new ArrayList<ArrayList<Particle>>();
+            new ArrayList<>();
 
     public Model(int n) {
         particles = new Particle[n];
