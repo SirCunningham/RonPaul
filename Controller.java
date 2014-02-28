@@ -61,8 +61,7 @@ public class Controller extends JPanel implements ActionListener,
         JSlider source = (JSlider) e.getSource();
         if (source == LSlider) {
             model.setL(source.getValue());
-        }
-        if (source == deltaSlider) {
+        } else if (source == deltaSlider) {
             model.setdt(source.getValue());
             timer.setDelay((int) model.getdt());
         }
