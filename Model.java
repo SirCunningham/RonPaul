@@ -12,8 +12,7 @@ public class Model {
     private static final int ymax = ((int) View.height) - 73;
     private static final int radiusSquared = (xmax > ymax ? ymax : xmax)
             * (xmax > ymax ? ymax : xmax) / 25;
-    private ArrayList<ArrayList<Particle>> stuckParticles =
-            new ArrayList<ArrayList<Particle>>();
+    private ArrayList<ArrayList<Particle>> stuckParticles = new ArrayList<>();
 
     public Model(int n) {
         particles = new Particle[n];
@@ -27,7 +26,7 @@ public class Model {
     }
 
     public ArrayList<Integer> limitRegions(int region) {
-        ArrayList<Integer> limitRegions = new ArrayList<Integer>();
+        ArrayList<Integer> limitRegions = new ArrayList<>();
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 int k = region + i + j * regions;

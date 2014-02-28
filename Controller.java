@@ -16,7 +16,7 @@ public class Controller extends JPanel implements ActionListener,
     private final JSlider deltaSlider;
     private static final int maxSteps = 200; //Convention?
     private int time = 0;
-    private int i = 0;
+    private final int i = 0;
     private BufferedWriter writer;
     private boolean log;
 
@@ -38,6 +38,7 @@ public class Controller extends JPanel implements ActionListener,
         this.view.getFrame().add(BorderLayout.NORTH, LSlider);
         this.view.getFrame().add(BorderLayout.WEST, deltaSlider);
         this.view.getFrame().addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent event) {
                 try {
                     writer.close();
@@ -55,6 +56,7 @@ public class Controller extends JPanel implements ActionListener,
         timer.start();
     }
 
+    @Override
     public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider) e.getSource();
         if (source == LSlider) {
@@ -66,6 +68,7 @@ public class Controller extends JPanel implements ActionListener,
         }
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         model.updatePos();
         view.repaint();

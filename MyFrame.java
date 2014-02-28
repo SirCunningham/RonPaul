@@ -1,4 +1,4 @@
-package java4;
+package labb4;
 
 import javax.swing.*;
 
