@@ -27,6 +27,7 @@ public class View extends JPanel {
         frame.setVisible(true);
     }
 
+    @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.BLUE);
